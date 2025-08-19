@@ -1,0 +1,93 @@
+import { Circuit } from "../src/core/circuit.js"
+import { MIG } from "../src/core/mig.js"
+import { mockData, mockMIG } from "./mock-data.js"
+
+describe("Circuit class calculateDelay method", () => {
+    let circuit
+
+    beforeEach(() => {
+        circuit = new Circuit()
+        const circuitMap = new Map()
+        mockData.forEach((circuit) => {
+            circuitMap.set(circuit.number, circuit)
+        })
+        circuit.parseCircuit(circuitMap, 1)
+        circuit.findAllPaths()
+    })
+
+    test("empty depths dict", () => {
+        const stateHistory = {}
+        expect(() => circuit.calculateDelay(stateHistory)).toThrow(
+            "states dict is empty"
+        )
+    })
+
+    test("calculate delay on 2nd set | depths dict", () => {
+        const allPaths = circuit.findAllPaths()
+        const depthsDict = circuit.buildDepthsDict(allPaths)
+        circuit.initializeCircuit(2)
+        const stateHistory = circuit.simulateCircuit(depthsDict)
+        expect(circuit.calculateDelay(stateHistory)).toEqual(3)
+    })
+
+    test("calculate delay on 2nd set | extended depths dict", () => {
+        const allPaths = circuit.findAllPaths()
+        const xDepthsDict = circuit.buildXDepthsDict(allPaths)
+        circuit.initializeCircuit(2)
+        const stateHistory = circuit.simulateCircuit(xDepthsDict)
+        expect(circuit.calculateDelay(stateHistory)).toEqual(1)
+    })
+
+    test("calculate delay on 0 set | extended depths dict", () => {
+        const allPaths = circuit.findAllPaths()
+        const xDepthsDict = circuit.buildXDepthsDict(allPaths)
+        circuit.initializeCircuit()
+        const stateHistory = circuit.simulateCircuit(xDepthsDict)
+        expect(circuit.calculateDelay(stateHistory)).toEqual(3)
+    })
+})
+
+describe("MIG class calculateDelay method", () => {
+    let circuit
+
+    beforeEach(() => {
+        circuit = new MIG()
+        const circuitMap = new Map()
+        mockMIG.forEach((circuit) => {
+            circuitMap.set(circuit.number, circuit)
+        })
+        circuit.parseCircuit(circuitMap, 23839913)
+        circuit.findAllPaths()
+    })
+
+    test("empty depths dict", () => {
+        const stateHistory = {}
+        expect(() => circuit.calculateDelay(stateHistory)).toThrow(
+            "states dict is empty"
+        )
+    })
+
+    test("calculate delay on 2nd set | depths dict", () => {
+        const allPaths = circuit.findAllPaths()
+        const depthsDict = circuit.buildDepthsDict(allPaths)
+        circuit.initializeCircuit(2)
+        const stateHistory = circuit.simulateCircuit(depthsDict)
+        expect(circuit.calculateDelay(stateHistory)).toEqual(4)
+    })
+
+    test("calculate delay on 0 set | extended depths dict", () => {
+        const allPaths = circuit.findAllPaths()
+        const xDepthsDict = circuit.buildXDepthsDict(allPaths)
+        circuit.initializeCircuit()
+        const stateHistory = circuit.simulateCircuit(xDepthsDict)
+        expect(circuit.calculateDelay(stateHistory)).toEqual(4)
+    })
+
+    test("calculate delay on 18th set | extended depths dict", () => {
+        const allPaths = circuit.findAllPaths()
+        const xDepthsDict = circuit.buildXDepthsDict(allPaths)
+        circuit.initializeCircuit(18)
+        const stateHistory = circuit.simulateCircuit(xDepthsDict)
+        expect(circuit.calculateDelay(stateHistory)).toEqual(2)
+    })
+})

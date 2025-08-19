@@ -1,0 +1,37 @@
+{
+  "name": "fcircuit-core",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "transform": {
+      "^.+\\.js$": "babel-jest"
+    }
+  },
+  "keywords": [
+    "logic",
+    "circuits",
+    "simulation",
+    "fcircuit",
+    "aig",
+    "mig",
+    "ig"
+  ],
+  "author": "6dem",
+  "license": "MIT",
+  "description": "Core library for functional circuit modeling and simulation.",
+  "devDependencies": {
+    "@babel/preset-env": "^7.28.3",
+    "babel-jest": "^30.0.5",
+    "jest": "^30.0.5"
+  }
+}
