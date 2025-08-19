@@ -1,4 +1,4 @@
-import { InvertElement } from "../ig-nodes.js"
+import { InvertElement } from "./ig-nodes.js"
 
 class AndInvertElement extends InvertElement {
     constructor(inputs, index, inverses) {
