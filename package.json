@@ -1,11 +1,17 @@
 {
   "name": "fcircuit-core",
   "version": "1.0.4",
-  "type": "commonjs",
+  "type": "module",
   "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "exports": {
+    "import": "./dist/index.mjs",
+    "require": "./dist/index.js"
+  },
   "scripts": {
     "test": "jest",
-    "build": "npx babel src --out-dir dist --extensions \".js\""
+    "build": "rollup -c",
+    "prepublishOnly": "npm run build"
   },
   "babel": {
     "presets": [
@@ -27,14 +33,23 @@
     "mig",
     "ig"
   ],
-  "author": "6dem",
+  "author": "Edem Ablaev [6dem]",
   "license": "MIT",
   "description": "Core library for functional circuit modeling and simulation.",
   "devDependencies": {
     "@babel/cli": "^7.28.3",
     "@babel/core": "^7.28.3",
     "@babel/preset-env": "^7.28.3",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-commonjs": "^28.0.6",
+    "@rollup/plugin-node-resolve": "^16.0.1",
     "babel-jest": "^30.0.5",
-    "jest": "^30.0.5"
-  }
+    "jest": "^30.0.5",
+    "rollup": "^4.48.1"
+  },
+  "files": [
+    "dist",
+    "src",
+    "README.md"
+  ]
 }

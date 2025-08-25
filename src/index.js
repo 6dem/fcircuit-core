@@ -1,7 +1,7 @@
-import AIG from "./core/aig.js"
-import Circuit from "./core/circuit.js"
-import IG from "./core/ig.js"
-import MIG from "./core/mig.js"
+import { AIG } from './core/aig.js'
+import { Circuit } from './core/circuit.js'
+import { IG } from './core/ig.js'
+import { MIG } from './core/mig.js'
 
 export { AIG, Circuit, IG, MIG }
 
