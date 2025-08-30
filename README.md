@@ -1,7 +1,7 @@
 # FCircuit Core
 
-**fcircuit-core** is a JavaScript library for modeling **Switching Function Elements (SFE) with delay**.
-It provides base classes and node implementations for building and simulating circuits such as IG, MIG, and AIG.
+**fcircuit-core** is a JavaScript library for modeling **Function Element Circuits with delay**.
+It provides base classes and node implementations for building and simulating circuits such as fcircuit, IG, MIG, and AIG.
 
 ---
 
